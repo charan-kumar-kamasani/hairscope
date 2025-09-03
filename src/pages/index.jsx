@@ -6,7 +6,7 @@ const LabAccessPortal = () => {
   const [showModal, setShowModal] = useState(true);
   const [isInsideLab, setIsInsideLab] = useState(false);
   const [error, setError] = useState("");
-  const [timeLeft, setTimeLeft] = useState(600);
+  const [timeLeft, setTimeLeft] = useState(6);
   const [hasExhausted, setHasExhausted] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const timerRef = useRef(null);
@@ -46,14 +46,17 @@ const LabAccessPortal = () => {
 
     if (password === correctPassword) {
       setError("");
-      setIsInsideLab(true);
-      setShowModal(false);
       return true;
     } else {
       setError("Incorrect password.");
       setShowAlert(true);
       return false;
     }
+  };
+
+  const handleUnlockComplete = () => {
+    setIsInsideLab(true);
+    setShowModal(false);
   };
 
   const handleExit = () => {
@@ -70,23 +73,22 @@ const LabAccessPortal = () => {
         onLogin={handleLogin}
         error={error}
         disabled={hasExhausted}
+        onUnlockComplete={handleUnlockComplete}
       />
 
-      {isInsideLab && (
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <h1 className="text-3xl font-bold">Welcome to the Lab</h1>
-          <p className="text-xl text-cyan-300">
-            Time Remaining: {Math.floor(timeLeft / 60)}:
-            {(timeLeft % 60).toString().padStart(2, "0")}
-          </p>
-          <button
-            onClick={handleExit}
-            className="px-6 py-2 bg-red-500 rounded hover:bg-red-600 transition"
-          >
-            Exit
-          </button>
-        </div>
-      )}
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <h1 className="text-3xl font-bold">Welcome to the Lab</h1>
+        <p className="text-xl text-cyan-300">
+          Time Remaining: {Math.floor(timeLeft / 60)}:
+          {(timeLeft % 60).toString().padStart(2, "0")}
+        </p>
+        <button
+          onClick={handleExit}
+          className="px-6 py-2 bg-red-500 rounded hover:bg-red-600 transition"
+        >
+          Exit
+        </button>
+      </div>
 
       <CustomAlert
         message={error}

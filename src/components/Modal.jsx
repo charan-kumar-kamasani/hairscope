@@ -9,7 +9,7 @@ import {
   time_spentImage,
 } from "../assets";
 
-const Modal = ({ show, onClose, onLogin, error }) => {
+const Modal = ({ show, onClose, onLogin, onUnlockComplete }) => {
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -19,6 +19,7 @@ const Modal = ({ show, onClose, onLogin, error }) => {
       setIsUnlocking(true);
       setTimeout(() => {
         setIsUnlocking(false);
+        onUnlockComplete();
       }, 1600);
     }
   };
@@ -30,9 +31,9 @@ const Modal = ({ show, onClose, onLogin, error }) => {
       {show && (
         <motion.div
           key="overlay"
-          className="fixed inset-0 bg-black z-50 flex overflow-hidden"
-          initial={{ opacity: 0.9 }}
-          animate={{ opacity: isUnlocking ? 0 : 0.9 }}
+          className="fixed inset-0 z-50 flex overflow-hidden"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          initial={{ opacity: 0.8 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2, ease: "easeInOut" }}
         >
@@ -153,11 +154,11 @@ const Modal = ({ show, onClose, onLogin, error }) => {
               >
                 <div className="w-full h-full border border-white/30 p-1">
                   <div className="flex items-center justify-center w-full h-full border border-white/20 relative">
+                    {/* Close (Cross) Icon */}
                     <button
                       onClick={onClose}
-                      className="absolute top-13 right-13 z-50"
+                      className="absolute top-8 right-13 z-50"
                     >
-                    
                       <img
                         src={cross}
                         alt="Close"
@@ -178,7 +179,7 @@ const Modal = ({ show, onClose, onLogin, error }) => {
             )}
           </AnimatePresence>
 
-          {/* center circle */}
+          {/* circle */}
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
             initial={{ scale: 1, opacity: 1, rotate: 0 }}
