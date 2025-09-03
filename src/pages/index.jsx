@@ -6,7 +6,7 @@ const LabAccessPortal = () => {
   const [showModal, setShowModal] = useState(true);
   const [isInsideLab, setIsInsideLab] = useState(false);
   const [error, setError] = useState("");
-  const [timeLeft, setTimeLeft] = useState(6);
+  const [timeLeft, setTimeLeft] = useState(600);
   const [hasExhausted, setHasExhausted] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const timerRef = useRef(null);

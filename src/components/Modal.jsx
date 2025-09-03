@@ -205,7 +205,7 @@ const Modal = ({ show, onClose, onLogin, onUnlockComplete }) => {
               />
               <button
                 onClick={handleEnter}
-                className="w-3/4 h-10 px-3 py-1.5 text-sm bg-cyan-300 text-black rounded"
+                className="w-3/4 h-10 px-3 py-1.5 text-sm bg-cyan-300 text-black rounded opacity-100"
               >
                 Enter Lab
               </button>
